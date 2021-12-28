@@ -1,7 +1,7 @@
 Name
 ====
 
-form-input-nginx-module - NGINX module that reads HTTP POST and PUT request body encoded in "application/x-www-form-urlencoded" and parses the arguments into nginx variables.
+_form-input-nginx-module_ - Nginx module that reads HTTP POST and PUT request body encoded in "application/x-www-form-urlencoded" and parses the arguments into Nginx variables.
 
 Table of Contents
 =================
@@ -18,17 +18,17 @@ Table of Contents
 Description
 ===========
 
-This is a nginx module that reads HTTP POST and PUT request body encoded
+This is a Nginx module that reads HTTP POST and PUT request body encoded
 in "application/x-www-form-urlencoded", and parse the arguments in
-request body into nginx variables.
+request body into Nginx variables.
 
 This module depends on the ngx_devel_kit (NDK) module.
 
 Installation
 ============
 
-Grab the nginx source code from [nginx.org](http://nginx.org/), for example,
-the version 1.9.15 (see [nginx compatibility](#compatibility)), and then build the source with this module:
+Grab the Nginx source code from [nginx.org](http://nginx.org/), for example,
+the version 1.9.15 (see [Nginx compatibility](#compatibility)), and then build the source with this module:
 
 ```bash
 wget 'http://nginx.org/download/nginx-1.9.15.tar.gz'
@@ -47,9 +47,7 @@ Download the latest version of the release tarball of this module from [form-inp
 Building as a dynamic module
 ----------------------------
 
-Starting from NGINX 1.9.11, you can also compile this module as a dynamic module, by using the `--add-dynamic-module=PATH` option instead of `--add-module=PATH` on the
-`./configure` command line above. And then you can explicitly load the module in your `nginx.conf` via the [load_module](http://nginx.org/en/docs/ngx_core_module.html#load_module)
-directive, for example,
+Starting from Nginx 1.9.11, you can also compile this module as a dynamic module, by using the `--add-dynamic-module=PATH` option instead of `--add-module=PATH` to the `./configure` command line above. You can then explicitly load the module at will within your config via the [load_module](http://nginx.org/en/docs/ngx_core_module.html#load_module) directive, for example,
 
 ```nginx
 load_module /path/to/modules/ndk_http_module.so;  # assuming NDK is built as a dynamic module too
@@ -69,10 +67,10 @@ set_form_input_multi $variable;
 set_form_input_multi $variable argument;
 ```
 
-example:
+example, showing relevant part of config file:
 
 ```nginx
-#nginx.conf
+# nginx.conf
 
 location /foo {
     # ensure client_max_body_size == client_body_buffer_size
@@ -101,13 +99,13 @@ location /bar {
 Limitations
 ===========
 
-* ngx_form_input will discard request bodies that are buffered
+* ngx_form_input will **discard request bodies** that are buffered
 to disk files. When the client_max_body_size setting is larger than
 client_body_buffer_size, request bodies that are larger
 than client_body_buffer_size (but no larger than
 client_max_body_size) will be buffered to disk files.
 So it's important to ensure these two config settings take
-the same values to avoid confustion.
+the same values to avoid potential confusion.
 
 [Back to TOC](#table-of-contents)
 
@@ -161,4 +159,3 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 [Back to TOC](#table-of-contents)
-
